@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>房贷计算器</title>
+</head>
+<body>
+    <h1 style="backgroud-color: antiquewhite; color:black;"> 房贷计算器</h1>
+    <form action="/calculator/index" method="post">
+        <table align="center">
+            <tr>
+                <td>贷款总结金额(万):</td>
+                <td> <input type="text" name="loan_amount" value="0"  /> </td>
+            </tr>
+            <tr>
+                <td>贷款利率(%):</td>
+                <td> <input type="text" name="loan_rate" value="4.90" /> </td>
+            </tr>
+            <tr>
+                <td>贷款时长(年):</td>
+                <td> <input type="text" name="loan_time" value="1" /> </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td> <input type="submit" value="提交"/> </td>
+            </tr>
+
+        </table>
+    </form>
+    <table border="1" cellpadding="10" align="center">
+        <thead>
+                <th colspan="2">等额本金</th>
+                <th colspan="2">等额本息</th>
+        </thead>
+        <thead>
+            <th>总利息1</th>
+            <th>总还款1</th>
+            <th>总利息2</th>
+            <th>总还款2</th>
+        </thead>
+        <tbody>
+            {% for item in data2 %}
+                <tr>
+                    <td>{{ item.interest_all1 }}</td>
+                    <td>{{ item.pay_all1 }}</td>
+                    <td>{{ item.interest_all2 }}</td>
+                    <td>{{ item.pay_all2 }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <table border="1" cellpadding="10" align="center">
+        <thead>
+                <th></th>
+                <th colspan="4">等额本金</th>
+                <th colspan="4">等额本息</th>
+        </thead>
+        <thead>
+            <th>期数</th>
+            <th>当月本金1</th>
+            <th>当月利息1</th>
+            <th>当月还款1</th>
+            <th>剩余本金1</th>
+            <th>当月本金2</th>
+            <th>当月利息2</th>
+            <th>当月还款2</th>
+            <th>剩余本金2</th>
+        </thead>
+        <tbody>
+            {% for item in data1 %}
+                <tr>
+                    <td>第{{ item.period }}期</td>
+                    <td>{{ item.e_principal1 }}</td>
+                    <td>{{ item.e_interest1 }}</td>
+                    <td align="right">{{ item.e_pay1 }}</td>
+                    <td>{{ item.surplus_principal1 }}</td>
+                    <td>{{ item.e_principal2 }}</td>
+                    <td>{{ item.e_interest2 }}</td>
+                    <td align="right">{{ item.e_pay2 }}</td>
+                    <td>{{ item.surplus_principal2 }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
